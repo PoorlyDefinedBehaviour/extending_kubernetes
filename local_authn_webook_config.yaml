@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Config
+cluters:
+  - name: local-authn
+    cluster:
+      server: https://localhost:3001
+users:
+  - name: authn-user
+current-context: webhook
+contexts:
+  - context:
+    cluster: serverless-authn
+    user: authn-user
+    -name: webhook
+
+# mkdir -p $HOME/.minikube/files/var/lib/minikube/certs
+# mv ./local_authn_webook_config.yaml $HOME/.minikube/files/var/lib/minikube/certs/local_authn_webook_config.yaml
+#
+# Start the cluster with the webhook configuration file 
+# minikube start --extra-config apiserver.authentication-token-webhook-config-file=/var/lib/minikube/certs/local_authn_webook_config.yaml
+#
+# Create a test user
+# kubectl config set-credentials auth-test
+# kubectl config set-context --current --user=auth-test
+#
+# The user should have access
+#
+# kubectl get nodes --token="system:masters;minikube-user:mysecret"
+#
+# Test with a invalid token
+# kubectl get nodes --token="invalidtoken"
