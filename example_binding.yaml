@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Binding
+metadata:
+  name: pod-to-be-assigned
+  namespace: default
+target:
+  apiVersion: v1
+  kind: Node
+  name: available-node
