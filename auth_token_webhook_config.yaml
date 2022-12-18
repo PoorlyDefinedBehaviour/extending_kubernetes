@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Config
+clusters:
+  - name: remote-auth-service
+    cluster:
+      certificate-authority: /path/to/ca.pem
+      server: https://extend.k8s.io/authenticate
+users:
+  - name: remote-auth-service-user
+    user:
+      client-certificate: /path/to/cert.pem
+      cliente-key: /path/to/key.pem
+current-context: webhook
+contexts:
+  - context:
+    cluster: remote-auth-service
+    user: remote-auth-service-user
+    name: webhook
