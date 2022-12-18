@@ -1,0 +1,20 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: nginx.validate.extend.k8s
+webhooks:
+  - name: nginx.validate.extend.k8s
+    namespaceSelector:
+      matchLabels:
+        nginx: "true"
+    rules:
+      - apiGroups: [""]
+        apiVersions: ["v1"]
+        operations: ["CREATE"]
+        resources: ["pods"]
+        scope: "Namespaced"
+    clientConfig:
+      url: https://us-central1-graceful-cider-290300.cloudfunctions.net/validate
+    admissionReviewVersions: ["v1", "v1beta"]
+    sideEffects: None
+    timeoutSeconds: 10
