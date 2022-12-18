@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Config
+cluters:
+  - name: serverless-authz
+    cluster:
+      server: SERVERLESS_ENDPOINT
+users:
+  - name: authz-user
+current-context: webhook
+contexts:
+  - context:
+    name: webhook
+    cluster: serverless-authz
+    user: authz-user
