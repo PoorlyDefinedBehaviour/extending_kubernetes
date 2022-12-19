@@ -1,0 +1,13 @@
+apiVersion: apiregistration.k8s.io/v1
+kind: APIService
+metadata:
+  name: v1.backup.extend-k8s.io
+spec:
+  version: v1
+  group: backup.extend-k8s.io
+  groupPriorityMinimum: 2000
+  service:
+    name: extension-server
+    namespace: kube-extensions
+  versionsPriority: 10
+  caBundle: "cert"
