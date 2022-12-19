@@ -1,0 +1,33 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: null
+  name: manager-role
+rules:
+- apiGroups:
+  - operator.extend-k8s.io
+  resources:
+  - timeseriesdbs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - operator.extend-k8s.io
+  resources:
+  - timeseriesdbs/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - operator.extend-k8s.io
+  resources:
+  - timeseriesdbs/status
+  verbs:
+  - get
+  - patch
+  - update

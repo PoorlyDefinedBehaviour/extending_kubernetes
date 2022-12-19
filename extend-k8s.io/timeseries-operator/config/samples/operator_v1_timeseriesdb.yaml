@@ -1,0 +1,13 @@
+apiVersion: operator.extend-k8s.io/v1
+kind: TimeSeriesDB
+metadata:
+  labels:
+    app.kubernetes.io/name: timeseriesdb
+    app.kubernetes.io/instance: timeseriesdb-sample
+    app.kubernetes.io/part-of: timeseries-operator
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: timeseries-operator
+  name: timeseriesdb-sample
+spec:
+  dbType: Prometheus
+  replicas: 5
