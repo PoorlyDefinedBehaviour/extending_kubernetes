@@ -1,0 +1,15 @@
+apiVersion: kubescheduler.config.k8s.io/v1beta
+kind: KubeSchedulerConfiguration
+clientConnection:
+  kubeconfig: /etc/kubernetes/scheduler.conf
+extenders:
+  - urlPrefix: http://localhost:8888
+    filterVerb: filter
+    ignorable: true
+    weight: 1
+  - urlPrefix: http://localhost:8890
+    filterVerb: filter
+    priorizeVerb: prioritize
+    bindVerb: bind
+    ignorable: false
+    weight: 1
