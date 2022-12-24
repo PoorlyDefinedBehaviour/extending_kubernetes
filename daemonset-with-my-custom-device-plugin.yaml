@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    name: device-plugin-example
+  name: device-plugin-example
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      name: device-plugin-example
+  template:
+    metadata:
+      labels:
+        name: device-plugin-example
+    spec:
+      containers:
+        - name: device-plugin-example
+          image: poorlydefinedbehaviour/k8s-device-plugin-example:latest
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: device-plugin
+              mountPath: /var/lib/kubelet/device-plugins
+      volumes:
+        - name: device-plugin
+          hostPath:
+            path: /var/lib/kubelet/device-plugins
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: device-plugin-consumer
+spec:
+  containers:
+    - name: pause
+      image: busybox
+      command: ["/bin/sleep", "1000"]
+      resources:
+        limits:
+          extend.k8s.io/example: 1
